@@ -8,4 +8,4 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 ENTRYPOINT ["python"]
-CMD ["iplist.py"]
+CMD ["ipdiscovery.py"]

@@ -4,6 +4,7 @@
         <title>OpenStack IP Query</title>
     </head>
     <body>
+
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <ul>
@@ -13,16 +14,42 @@
                 </ul>
             {% endif %}
         {% endwith %}
+
+        <h1 id="title">ROGER Floating IP Lookup</h1>
+        <div class="intro">Submit an IP address from ROGER's floating IP pool (141.142.170.0/24).</div>
+        <br/> 
+
         <form action="" method="post">
             {{ form.csrf }}
  
             <div class="input text">
-                {{ form.name.label }} {{ form.name }}
+                {{ form.ip.label }} {{ form.ip }}
             </div>
  
             <div class="input submit">
                 <input type="submit" value="Submit" />
             </div>
         </form>
+
+        <br/>
+      {% if info["status"] == "success" %}
+        <h4>Results</h4> 
+        <div class="results">Server Name: {{ info.server }}</div>
+        <div class="results">Created: {{ info.created }}</div>
+        <br/>
+        <div class="results">Project Name: {{ info.project }}</div>
+        <div class="results">Project Description: {{ info.description }}</div>
+        <div class="results">Project Email: {{ info.project_email }}</div>
+        <br/>
+        <div class="results">User: {{ info.user }}</div>
+        <div class="results">Username: {{ info.username }}</div>
+        <div class="results">User Email: {{ info.user_email }}</div>
+      {% elif info["status"] == "fail" %}
+        <h4>Results</h4> 
+        <div id="noresults">
+          No results found. The server may have been terminated or
+          the floating IP released.
+        </div>
+      {% endif %}
     </body>
 </html>

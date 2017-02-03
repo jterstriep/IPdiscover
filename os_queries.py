@@ -24,6 +24,7 @@ def get_info(id):
     project = json.loads(check_output(cmd.split()))
 
     return dict(
+        status="success",
         server=server['name'],
         created=server['created'],
         username=user['username'],
@@ -44,7 +45,7 @@ def match_ip(ip):
         if ip in s['Networks']:
             return get_info(s['ID'])
 
-    return None
+    return { "status": "fail" }
 
 
 if __name__ == '__main__':

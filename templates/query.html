@@ -32,14 +32,20 @@
         </form>
 
         <br/>
-      {% if info["status"] == "success" %}
+      {% if info["status"] == "ok" %}
         <h4>Results</h4> 
         <div class="results">Server Name: {{ info.server }}</div>
         <div class="results">Created: {{ info.created }}</div>
         <br/>
-        <div class="results">Project Name: {{ info.project }}</div>
-        <div class="results">Project Description: {{ info.description }}</div>
-        <div class="results">Project Email: {{ info.project_email }}</div>
+        <div class="results">Project Name: {{ info.project_name }}</div>
+        <div class="results">
+          Project Description: {{ info.project_description }}
+        </div>
+        {% if "project_email" in info %}
+          <div class="results">
+            Project Email: {{ info.project_email }}
+          </div>
+        {% endif %}
         <br/>
         <div class="results">User: {{ info.user }}</div>
         <div class="results">Username: {{ info.username }}</div>
